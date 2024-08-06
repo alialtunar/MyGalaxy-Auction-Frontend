@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
+import { useGetVehiclesQuery } from '../../api/vehicleApi';
 import { vehicleModel } from '../../interfaces/vehicleModel';
-import './Styles/VehicleList.css';
+import { Link } from 'react-router-dom';
 import Circle from './Circle';
+import "./Styles/VehicleList.css"
+import Banner from './Banner';
 
-interface VehicleListProps {
-  vehicles: vehicleModel[];
-}
+function VehicleList() {
+  const {data,isLoading} = useGetVehiclesQuery(null);
+  const [vehicles,setVehiclesState] = useState<vehicleModel[]>([]);
+ 
+ useEffect(()=>{
+  if(data){
+    console.log(data);
+    setVehiclesState(data.result);
+  }
 
-const VehicleList: React.FC<VehicleListProps> = ({ vehicles }) => {
+ },[data])
   return (
+    <div className='container'>
+      <Banner></Banner>
+      <div className='row'>
     <>
       {vehicles.map((vehicle, index) => (
         <div className='col' key={index}>
@@ -24,14 +36,18 @@ const VehicleList: React.FC<VehicleListProps> = ({ vehicles }) => {
               <p><strong>End Time:</strong> ${vehicle.endTime}</p>
             </div>
             <div>
-              <button className='btn btn-danger'>Detail</button>
+              <Link to={`Vehicle/VehicleId/${vehicle.vehicleId}`}>
+              <button  className='btn btn-danger'>Detail</button>
+              </Link>
             </div>
             <Circle vehicle={vehicle} />
           </div>
         </div>
       ))}
     </>
-  );
+    </div>
+    </div>
+  )
 }
 
-export default VehicleList;
+export default VehicleList

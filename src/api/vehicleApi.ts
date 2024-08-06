@@ -13,8 +13,14 @@ endpoints:(builder) => ({
             url:"GetVehicles"
         })
     }),
+    getVehiclesById:builder.query({
+        query:(id)=>({
+            url:`${id}`,
+            
+        })
+    }),
 })
 })
 
-export const {useGetVehiclesQuery} = vehicleApi;
+export const {useGetVehiclesQuery,useGetVehiclesByIdQuery} = vehicleApi;
 export default vehicleApi;

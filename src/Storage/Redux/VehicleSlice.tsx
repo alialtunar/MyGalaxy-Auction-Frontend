@@ -2,17 +2,17 @@ import {createSlice} from '@reduxjs/toolkit';
 
 
 
-const initialState = {
+const InitialState = {
     vehicles:[],
 }
 
 export const vehicleSlice = createSlice({
     name:"vehicle",
-    initialState:initialState,
+    initialState:InitialState,
     reducers:{
         getVehicles:(state,action) =>{
             state.vehicles = action.payload;
-        }
+        },
     }
 })
 

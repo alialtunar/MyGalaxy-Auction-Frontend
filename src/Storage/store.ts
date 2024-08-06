@@ -1,14 +1,20 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { vehicleReducer } from "./Redux/VehicleSlice";
 import vehicleApi from "../api/vehicleApi";
+import { accountApi } from "../api/accountApi";
+import { authenticationReducer } from "./Redux/authenticationSlice";
 
 
 
 const store = configureStore({
     reducer:{
         vehicleStore : vehicleReducer,
-        [vehicleApi.reducerPath]:vehicleApi.reducer
-    },middleware:(getDefaultMiddleware) => getDefaultMiddleware().concat(vehicleApi.middleware)
+        authenticationStore:authenticationReducer,
+
+        
+        [vehicleApi.reducerPath]:vehicleApi.reducer,
+        [accountApi.reducerPath]:accountApi.reducer
+    },middleware:(getDefaultMiddleware) => getDefaultMiddleware().concat(vehicleApi.middleware,accountApi.middleware)
 })
 
 
