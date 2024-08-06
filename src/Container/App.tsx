@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { VehicleList } from '../Pages/Vehicles';
 
@@ -7,8 +7,23 @@ import { Route, Routes } from 'react-router-dom';
 import VehiceDetail from '../Pages/Vehicles/VehiceDetail';
 import Register from '../Pages/Account/Register';
 import Login from '../Pages/Account/Login';
+import { useDispatch } from 'react-redux';
+import userModel from '../interfaces/userModel';
+import { jwtDecode } from 'jwt-decode';
+import { setLoggedInUser } from '../Storage/Redux/authenticationSlice';
 
 function App() {
+const Dispatch = useDispatch();
+useEffect(()=>{
+const token = localStorage.getItem('token');
+if(token){
+  const {nameid,email,role,fullName}:userModel = jwtDecode(token);
+  Dispatch(setLoggedInUser({
+   nameid,email,role,fullName
+  }))
+}
+},)
+
   return (
     <div className="App">
       <Header/>
