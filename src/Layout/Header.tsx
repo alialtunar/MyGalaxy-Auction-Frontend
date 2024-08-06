@@ -15,9 +15,7 @@ function Header() {
   const navigate = useNavigate();
 
    useEffect(()=>{
-    console.log(userStore);
-    console.log("trigeer")
-    console.log(token);
+
    },[userStore,token])
 
    const handleLogout = () =>{

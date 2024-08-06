@@ -18,7 +18,7 @@ function Register() {
         password:userData.password,
         userType:userData.userType
       })
-      console.log(response);
+
     }
   
   return (

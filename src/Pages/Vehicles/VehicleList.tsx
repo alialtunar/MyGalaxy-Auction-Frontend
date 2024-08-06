@@ -12,7 +12,6 @@ function VehicleList() {
  
  useEffect(()=>{
   if(data){
-    console.log(data);
     setVehiclesState(data.result);
   }
 

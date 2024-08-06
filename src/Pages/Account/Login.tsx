@@ -31,7 +31,7 @@ function Login() {
        navigate("/");
        }
     }
-    console.log(userData);
+
   return (
     <section>
     <div className="container">
