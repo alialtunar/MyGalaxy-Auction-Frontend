@@ -1,7 +1,7 @@
 /* Sayfa arkaplanı */
 body {
     background-color: rgb(240, 240, 240); /* Siyah */
-    color: #eee; /* Beyaz */
+    color: #150909; /* Beyaz */
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -9,7 +9,7 @@ body {
 
 /* Başlık */
 h1 {
-    color: silver; /* Kırmızı */
+    color: black; /* Kırmızı */
     text-align: center;
 }
 

@@ -6,7 +6,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const paymentHistoryApi = createApi({
     reducerPath:"paymentHistoryApi",
     baseQuery:fetchBaseQuery({
-        baseUrl:"https://localhost:7206/api/PaymentHistory/",
+        baseUrl:"https://localhost:7241/api/PaymentHistory/",
     }),
     endpoints:(builder) => ({
         checkStatusAuctionPrice:builder.mutation({
@@ -15,9 +15,16 @@ const paymentHistoryApi = createApi({
                 method:"POST",
                 body:statusDetail
             })
+            }),
+            createPaymentHistory:builder.mutation({
+                query:(paymentHistory) =>({
+                   url:"AddHistory",
+                   method:"POST",
+                   body:paymentHistory
+                })
         }),
     })
 })
 
-export const {useCheckStatusAuctionPriceMutation} = paymentHistoryApi;
+export const {useCheckStatusAuctionPriceMutation,useCreatePaymentHistoryMutation} = paymentHistoryApi;
 export default paymentHistoryApi

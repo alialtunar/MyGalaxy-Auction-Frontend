@@ -11,6 +11,8 @@ import { useDispatch } from 'react-redux';
 import userModel from '../interfaces/userModel';
 import { jwtDecode } from 'jwt-decode';
 import { setLoggedInUser } from '../Storage/Redux/authenticationSlice';
+import BidCheckout from '../Pages/Bid/BidCheckout';
+import Payment from '../Pages/Payment/Payment';
 
 function App() {
 const Dispatch = useDispatch();
@@ -33,6 +35,8 @@ if(token){
         <Route path='Vehicle/VehicleId/:vehicleId' element={<VehiceDetail></VehiceDetail>}></Route>
         <Route path='Register' element={<Register></Register>}></Route>
         <Route path='Login' element={<Login></Login>}></Route>
+        <Route path="Vehicle/BidCheckout/:vehicleId" element={<BidCheckout></BidCheckout>}></Route>
+        <Route path='Payment' element={<Payment></Payment>}></Route>
       </Routes>
      </div>
     </div>

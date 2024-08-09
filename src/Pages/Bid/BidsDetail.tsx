@@ -9,6 +9,8 @@ import { checkStatus } from "../../interfaces/checkStatus";
 import { useEffect, useState } from "react";
 import CreateBid from "./CreateBid";
 import { useGetVehiclesByIdQuery } from "../../api/vehicleApi";
+import { useNavigate } from "react-router-dom";
+import { bidModel } from "../../interfaces/bidModel";
 
 function BidsDetail(props:{vehicleId:string}) {
 
@@ -18,15 +20,12 @@ function BidsDetail(props:{vehicleId:string}) {
     const [result,setResultState] = useState(); 
     var model:any ={}
     const response_data = useGetVehiclesByIdQuery(parseInt(props.vehicleId));
-
-    if(response_data){
-
-    }
+    const navigate = useNavigate();
 
 
-if (data) {
-   
-}
+useEffect(()=>{
+
+},[data])
 
 useEffect(()=>{
 
@@ -42,8 +41,16 @@ checkStatusAuction(checkModel).then((response:any) =>{
 })
     
 
-},[props.vehicleId,userStore.nameid,checkStatusAuction])
+},[props.vehicleId,userStore.nameid,checkStatusAuction,userStore])
    
+
+const handleBidCheckout = (props:any) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        navigate("/login");
+    }
+    navigate(`/Vehicle/BidCheckout/${props}`)
+}
   
 
 
@@ -57,9 +64,9 @@ if(!data){
     <>
     {
         result ? (
-            <div className="container mb-5"> <CreateBid></CreateBid></div>) : (
-            <div className="container mb-5">
-                <button className="btn btn-warning" type="button">Pay Production Price ${response_data.currentData?.result.auctionPrice}</button>
+            <div className="container mb-5"> <CreateBid vehicleId={parseInt(props.vehicleId)}></CreateBid></div>) : (
+                <div className='container mb-5'  >
+                <button className='btn btn-warning' type='button' onClick={()=>handleBidCheckout(props.vehicleId)} >Pay PreAuction Price ${response_data.currentData?.result.auctionPrice} </button>
             </div>
         )
     }
@@ -67,7 +74,7 @@ if(!data){
     <div className="bid-list">
     
         {
-            data.result.map((bid:any,key:any) => {return (
+            data.result.slice().sort((a:bidModel,b:bidModel) =>b.bidAmount - a.bidAmount).map((bid:any,key:any) => {return (
                 <div className="mt-4" key={key}>
                 <div className="bid">
                 <span className="bid-number">{key}</span>
